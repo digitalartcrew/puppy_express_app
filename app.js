@@ -36,16 +36,36 @@ app.get('/puppies/update/:id', function (req, res){
 	});
 });
 
-app.put('puppies/update/:id', function (req, res){
+app.delete('/puppies/:id', function (req, res){
+	var id = req.params.id;
+	puppies.forEach(function(puppy, index){
+		if( parseInt(id) === puppy.id){
+			puppies.splice(index, 1);
+			
+		} 
+	});
+		res.redirect('/');
+
+});
+
+app.put('/puppies/update/:id', function (req, res){
 	var id = req.params.id;
 	var currentPuppy;
+	var pupName= req.body.puppy_name;
+	var pupAge = req.body.puppy_age;
+	var pupImg = req.body.puppy_image;
 
 		puppies.forEach(function(puppy){
 		if( parseInt(id) === puppy.id){
 			currentPuppy = puppy;
-			console.log("Found Match");
-			res.render("/", {puppy: puppy});
+			console.log("Found Match!");
+			
 		} 
+	currentPuppy.name = pupName;
+	currentPuppy.age = pupAge;
+	currentPuppy.image = pupImg;
+	res.redirect('/');
+
 	});
 });
 

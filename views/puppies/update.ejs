@@ -46,7 +46,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 <center>
-<form action="/puppies/<%=puppy.id %>?_method=put" method="POST" class="jumbotron">
+<form action="/puppies/update/<%=puppy.id %>?_method=put" method="POST" class="jumbotron">
 	<p>
 	<label for="puppy_name">What is your puppy's name?</label>
 	<input type="text" id="puppy_name" name ="puppy_name" value="" placeholder="<%= puppy.name%>" required>
@@ -57,9 +57,10 @@
 	</p>
 	<p>
 	<label for="puppy_age">Paste Image URL:</label>
-	<input type="text" id="puppy_image" name ="puppy_image" value="" placeholder="<%= puppy.imagee%>" required>
+	<input type="text" id="puppy_image" name ="puppy_image" value="" placeholder="<%= puppy.image%>" required>
 	</p>
-	<a href="/puppies/update/>">Update</a>
+
+  <button type="submit">Submit</button>
 
 </form>
 </center>

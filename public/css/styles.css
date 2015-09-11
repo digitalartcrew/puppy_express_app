@@ -3,6 +3,11 @@
     background-color: white;
 }
 
+tr {
+	border: 1px solid black;
+
+}
+
 body {
 /*	background: url(/img/sharpei_puppies.jpg);*/
 background-color: cornflowerblue;
