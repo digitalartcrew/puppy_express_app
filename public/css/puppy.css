@@ -1,8 +1,3 @@
-.table td, .table th {
-    border: 1px solid #2980B9;
-    background-color: white;
-}
-
 body {
 /*	background: url(/img/sharpei_puppies.jpg);*/
 background-color: cornflowerblue;
@@ -10,5 +5,5 @@ background-color: cornflowerblue;
 }
 
 img {
-	width: 50px;
+	width: 150px;
 }
