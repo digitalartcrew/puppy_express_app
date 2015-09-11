@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Show</title>
-	<link rel="stylesheet" href="../css/puppy.css">
+	<title>Upate Puppy Form</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	
+	<!-- Latest compiled and minified JavaScript -->
+	
 </head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-
 <body>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -47,15 +46,27 @@
   </div><!-- /.container-fluid -->
 </nav>
 <center>
-<h1><%= puppy.name %></h1>
-<p>
-<img src= <%= puppy.image%> >
-</p>
-<p><%= puppy.age%></p>
-<a href="/puppies/update/<%= puppy.id%>" >Update</a>
+<form action="/puppies/<%=puppy.id %>?_method=put" method="POST" class="jumbotron">
+	<p>
+	<label for="puppy_name">What is your puppy's name?</label>
+	<input type="text" id="puppy_name" name ="puppy_name" value="" placeholder="<%= puppy.name%>" required>
+	</p>
+	<p>
+	<label for="puppy_age">How old is your puppy?</label>
+	<input type="text" id="puppy_age" name ="puppy_age" value="" placeholder="<%= puppy.age%>" required>
+	</p>
+	<p>
+	<label for="puppy_age">Paste Image URL:</label>
+	<input type="text" id="puppy_image" name ="puppy_image" value="" placeholder="<%= puppy.imagee%>" required>
+	</p>
+	<a href="/puppies/update/>">Update</a>
+
+</form>
 </center>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<!-- <script type="text/javascript" src="puppy.js"></script> -->
+	
 </body>
 </html>

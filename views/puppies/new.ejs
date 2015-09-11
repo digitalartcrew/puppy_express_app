@@ -46,7 +46,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 <center>
-<form action="/puppies" method="GET" class="jumbotron">
+<form action="/puppies" method="POST" class="jumbotron">
 	<p>
 	<label for="puppy_name">What is your puppy's name?</label>
 	<input type="text" id="puppy_name" name ="puppy_name" value="" placeholder="e.g Fido" required>
@@ -56,7 +56,7 @@
 	<input type="text" id="puppy_age" name ="puppy_age" value="" placeholder="3" required>
 	</p>
 	<p>
-	<label for="puppy_age">Upload an image:</label>
+	<label for="puppy_age">Paste Image URL:</label>
 	<input type="text" id="puppy_image" name ="puppy_image" value="" placeholder="3" required>
 	</p>
 	<button type="submit">Submit</button>
