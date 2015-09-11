@@ -6,3 +6,7 @@ body {
 	background-image: url(img/sharpei_puppies.jpg);
 
 }
+
+img {
+	width: 50px;
+}

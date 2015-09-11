@@ -15,7 +15,7 @@ var id = 2;
 
 
 var puppies = [{
-	name: "Mac", age: 2, id: 1, image: "<%= img_tag('img/sharpei_puppies.jpg') %>"
+	name: "Mac", age: 2, id: 1, image: 'img/sharpei_puppies.jpg'
 }, ];
 
 
