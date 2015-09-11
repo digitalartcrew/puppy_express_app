@@ -1,19 +1,21 @@
-var express = require('express');
-	app = express();
-	bodyParser = require("body-parser");
+var express = require('express'),
+  app = express(),
+  bodyParser = require("body-parser");
+  methodOverride = require('method-override');
+
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended: true})); 
+app.use(methodOverride('_method'));
+
 
 
 var id = 2;
 
 
 
-app.set('view engine', 'ejs');
-
-app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({extended: true}));
-
 var puppies = [{
-	name: "Mac", age: 2, id: 1
+	name: "Mac", age: 2, id: 1, image: "<%= img_tag('img/sharpei_puppies.jpg') %>"
 }, ];
 
 
@@ -22,6 +24,8 @@ app.get('/', function(req,res){
 //use res.render
 res.render('index',{puppies: puppies});
 });
+
+
 
 
 
@@ -52,16 +56,18 @@ app.get('/puppies/:id', function (req, res){
 			res.render("puppies/show", {puppy: puppy});
 		} 
 	});
-	// if (currentPuppy === undefined){
-	// 	res.redirect('/');
-	// }
+
 
 
 });
 
-app.get('/about', function(){});
+app.get('/about', function (req, res){
+	res.render('about', {puppies: puppies});
+});
 
-app.get('/contact', function(){});
+app.get('/contact', function ( req, res){
+	res.render('contact', {puppies: puppies});
+});
 
 app.listen(3000, function(){
 	console.log("Server running on port 3000");
