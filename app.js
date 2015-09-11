@@ -9,38 +9,52 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 
-
 var id = 2;
-
-
-
 var puppies = [{
 	name: "Mac", age: 2, id: 1, image: '/img/sharpei_puppies.jpg'
 }, ];
 
-
-
 app.get('/', function(req,res){
-//use res.render
-res.render('index',{puppies: puppies});
+	res.render('index',{puppies: puppies});
 });
-
-
-
-
-
 
 // To get a form to save a new puppy
 app.get('/puppies/new', function (req,res){
 	res.render('puppies/new');
 });
 
+app.get('/puppies/update/:id', function (req, res){
+		var id = req.params.id;
+	var currentPuppy;
+
+		puppies.forEach(function(puppy){
+		if( parseInt(id) === puppy.id){
+			currentPuppy = puppy;
+			console.log("Found Match");
+			res.render("puppies/update", {puppy: puppy});
+		} 
+	});
+});
+
+app.put('puppies/update/:id', function (req, res){
+	var id = req.params.id;
+	var currentPuppy;
+
+		puppies.forEach(function(puppy){
+		if( parseInt(id) === puppy.id){
+			currentPuppy = puppy;
+			console.log("Found Match");
+			res.render("/", {puppy: puppy});
+		} 
+	});
+});
+
 //To save a new puppy
-app.get('/puppies', function (req,res){
-	var pupName= req.query.puppy_name;
-	var pupAge = req.query.puppy_age;
-	var pupImg = req.query.puppy_image;
-	puppies.push({name: pupName, age: pupAge, id: id, image:pupImg});
+app.post('/puppies', function (req,res){
+	var pupName= req.body.puppy_name;
+	var pupAge = req.body.puppy_age;
+	var pupImg = req.body.puppy_image;
+	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
 	id++;
 	res.redirect('/');
 });

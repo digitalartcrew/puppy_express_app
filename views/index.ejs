@@ -22,7 +22,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Puppy Chart</a>
+      <a class="navbar-brand" href="/">Puppy Chart</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -61,25 +61,30 @@
 	<tbody>
 			
 			<tr>
-			<td>
+				<td>
 				<%puppies.forEach(function(puppy){%>
 					<%= puppy.id%><br>
 				<%});%>
 				</td>
 				
 				<td><%puppies.forEach(function(puppy){%>
-					<a href="/puppies/<%=puppy.id%>"><%= puppy.name%><br></a>
+					<a href="/puppies/<%=puppy.id%>">
+					<%= puppy.name%><br></a>
 				<%});%>
 				</td>
+
 				<td>
 				<%puppies.forEach(function(puppy){%>
 					<%= puppy.age%><br>
 				<%});%>
 				</td>
-				<td><%puppies.forEach(function(puppy){%>
-				<img src= <%= puppy.image%> %><br></a>
+
+				<td>
+				<%puppies.forEach(function(puppy){%>
+				<img src= <%= puppy.image%> ><br>
 				<%});%>
 				</td>
+
 			</tr>
 		
 			
