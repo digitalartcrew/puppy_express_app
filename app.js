@@ -1,6 +1,6 @@
 var express = require('express'),
   app = express(),
-  bodyParser = require("body-parser");
+  bodyParser = require('body-parser');
   methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
@@ -9,10 +9,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 
-var id = 2;
-var puppies = [{
-	name: "Mac", age: 2, id: 1, image: '/img/sharpei_puppies.jpg'
-}, ];
+var id = 1;
+var puppies = [];
 
 app.get('/', function(req,res){
 	res.render('index',{puppies: puppies});
@@ -22,6 +20,18 @@ app.get('/', function(req,res){
 app.get('/puppies/new', function (req,res){
 	res.render('puppies/new');
 });
+
+//To save a new puppy
+app.post('/puppies', function (req,res){
+	var pupName= req.body.puppy_name;
+	var pupAge = req.body.puppy_age;
+	var pupImg = req.body.puppy_image;
+	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
+	id++;
+	res.redirect('/');
+});
+
+
 
 app.get('/puppies/update/:id', function (req, res){
 		var id = req.params.id;
@@ -69,15 +79,7 @@ app.put('/puppies/update/:id', function (req, res){
 	});
 });
 
-//To save a new puppy
-app.post('/puppies', function (req,res){
-	var pupName= req.body.puppy_name;
-	var pupAge = req.body.puppy_age;
-	var pupImg = req.body.puppy_image;
-	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
-	id++;
-	res.redirect('/');
-});
+
 
 //To Find a puppy by ID
 app.get('/puppies/:id', function (req, res){
