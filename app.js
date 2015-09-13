@@ -12,6 +12,16 @@ app.use(methodOverride('_method'));
 var id = 1;
 var puppies = [];
 
+//To save a new puppy
+app.post('/puppies', function (req,res){
+	var pupName= req.body.name;
+	var pupAge = req.body.age;
+	var pupImg = req.body.image;
+	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
+	id++;
+	res.redirect('/');
+});
+
 app.get('/', function(req,res){
 	res.render('index',{puppies: puppies});
 });
@@ -20,17 +30,6 @@ app.get('/', function(req,res){
 app.get('/puppies/new', function (req,res){
 	res.render('puppies/new');
 });
-
-//To save a new puppy
-app.post('/puppies', function (req,res){
-	var pupName= req.body.puppy_name;
-	var pupAge = req.body.puppy_age;
-	var pupImg = req.body.puppy_image;
-	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
-	id++;
-	res.redirect('/');
-});
-
 
 
 app.get('/puppies/update/:id', function (req, res){
@@ -61,9 +60,9 @@ app.delete('/puppies/:id', function (req, res){
 app.put('/puppies/update/:id', function (req, res){
 	var id = req.params.id;
 	var currentPuppy;
-	var pupName= req.body.puppy_name;
-	var pupAge = req.body.puppy_age;
-	var pupImg = req.body.puppy_image;
+	var pupName= req.body.name;
+	var pupAge = req.body.age;
+	var pupImg = req.body.image;
 
 		puppies.forEach(function(puppy){
 		if( parseInt(id) === puppy.id){
