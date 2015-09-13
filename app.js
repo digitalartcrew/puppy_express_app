@@ -8,20 +8,13 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true})); 
 app.use(methodOverride('_method'));
 
-
+//Set initial ID
 var id = 1;
+
+//Created puppy array
 var puppies = [];
 
-//To save a new puppy
-app.post('/puppies', function (req,res){
-	var pupName= req.body.name;
-	var pupAge = req.body.age;
-	var pupImg = req.body.image;
-	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
-	id++;
-	res.redirect('/');
-});
-
+//Get the home application page
 app.get('/', function(req,res){
 	res.render('index',{puppies: puppies});
 });
@@ -31,11 +24,34 @@ app.get('/puppies/new', function (req,res){
 	res.render('puppies/new');
 });
 
+//To save a new puppy
+app.post('/puppies', function (req,res){
+	var pupName= req.body.puppy_name;
+	var pupAge = req.body.puppy_age;
+	var pupImg = req.body.puppy_image;
+	puppies.push({name: pupName, age: pupAge, id: id, image: pupImg });
+	id++;
+	res.redirect('/');
+});
 
+//To Find a puppy by ID and display info
+app.get('/puppies/:id', function (req, res){
+	var id = req.params.id;
+	var currentPuppy;
+	puppies.forEach(function(puppy){
+		if( parseInt(id) === puppy.id){
+			currentPuppy = puppy;
+			console.log("Found Match");
+			res.render("puppies/show", {puppy: puppy});
+		} 
+	});
+
+});
+
+//Update the specific puppy information on page
 app.get('/puppies/update/:id', function (req, res){
 		var id = req.params.id;
-	var currentPuppy;
-
+		var currentPuppy;
 		puppies.forEach(function(puppy){
 		if( parseInt(id) === puppy.id){
 			currentPuppy = puppy;
@@ -45,24 +61,14 @@ app.get('/puppies/update/:id', function (req, res){
 	});
 });
 
-app.delete('/puppies/:id', function (req, res){
-	var id = req.params.id;
-	puppies.forEach(function(puppy, index){
-		if( parseInt(id) === puppy.id){
-			puppies.splice(index, 1);
-			
-		} 
-	});
-		res.redirect('/');
 
-});
 
 app.put('/puppies/update/:id', function (req, res){
 	var id = req.params.id;
 	var currentPuppy;
-	var pupName= req.body.name;
-	var pupAge = req.body.age;
-	var pupImg = req.body.image;
+	var pupName= req.body.puppy_name;
+	var pupAge = req.body.puppy_age;
+	var pupImg = req.body.puppy_image;
 
 		puppies.forEach(function(puppy){
 		if( parseInt(id) === puppy.id){
@@ -80,22 +86,23 @@ app.put('/puppies/update/:id', function (req, res){
 
 
 
-//To Find a puppy by ID
-app.get('/puppies/:id', function (req, res){
+
+
+//Delete a puppy
+app.delete('/puppies/:id', function (req, res){
 	var id = req.params.id;
-	var currentPuppy;
-	puppies.forEach(function(puppy){
+	puppies.forEach(function(puppy, index){
 		if( parseInt(id) === puppy.id){
-			currentPuppy = puppy;
-			console.log("Found Match");
-			res.render("puppies/show", {puppy: puppy});
+			puppies.splice(index, 1);
+			
 		} 
 	});
-
-
+		res.redirect('/');
 
 });
 
+
+//Additonal Application
 app.get('/about', function (req, res){
 	res.render('about', {puppies: puppies});
 });
